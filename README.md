@@ -1,6 +1,6 @@
 # window-helper
 
-[简体中文](./README-cn.md)
+English | [简体中文](./README-cn.md)
 
 ## Description
 

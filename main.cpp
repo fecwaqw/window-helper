@@ -1,28 +1,29 @@
-#include <windows.h>
-
-bool key(int key)
-{
-    return (GetAsyncKeyState(key) & 0x8000);
-}
+#include "wh.hpp"
+using namespace std;
 
 int main()
 {
-    HWND window;
-    while (1)
-    {
-        if (key(VK_SHIFT) && key('R'))
+    wh::initHotKey();
+    MSG msg = {0};
+    HWND tmpHWND = NULL;
+    bool show = false;
+    while (GetMessage(&msg, NULL, 0, 0) != 0)
+        if (msg.message == WM_HOTKEY)
         {
-            window = GetForegroundWindow();
+            if (msg.wParam == wh::hotKeyId.at(0) && show == true)
+            {
+                tmpHWND = GetForegroundWindow();
+                wh::hWndList.push_back(tmpHWND);
+                show = true;
+            }
+            if (msg.wParam == wh::hotKeyId.at(1))
+            {
+                if (show)
+                    ShowWindow(tmpHWND, SW_HIDE);
+                else
+                    ShowWindow(tmpHWND, SW_SHOW);
+                show = !show;
+            }
         }
-        if (key(VK_SHIFT) && key('Z'))
-        {
-            ShowWindow(window, SW_HIDE);
-        }
-        if (key(VK_SHIFT) && key('X'))
-        {
-            ShowWindow(window, SW_SHOW);
-        }
-        Sleep(100);
-    }
     return 0;
 }
