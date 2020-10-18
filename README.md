@@ -26,9 +26,7 @@ g++ ./main.cpp -o window-helper
 
 Use `<shift>+R` to get the window handle.
 
-Use `<shift>+Z` to hide the window.
-
-Use `<shift>+X` to display the window.
+Use `<shift>+Z` to hide/display the window .
 
 ## Developers
 
